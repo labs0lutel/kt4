@@ -1,4 +1,3 @@
-// Функционал Fetch API для работы с Fake API
 async function fetchData(endpoint) {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/${endpoint}`);
@@ -19,20 +18,20 @@ function renderData(data) {
     container.innerHTML = '';
     data.forEach(item => {
         const div = document.createElement('div');
-        div.textContent = JSON.stringify(item, null, 2); 
+        div.textContent = JSON.stringify(item, null, 2);
         container.appendChild(div);
     });
 }
 
 document.querySelector('#loadDataButton').addEventListener('click', async () => {
-    const endpoint = document.querySelector('#dataTypeSelect').value; 
+    const endpoint = document.querySelector('#dataTypeSelect').value;
     const data = await fetchData(endpoint);
     if (data) {
         renderData(data);
     }
 });
 
-const socket = io('http://localhost:3000');
+const socket = io('https://kt4.onrender.com'); 
 
 document.querySelector('#chatForm').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -52,7 +51,7 @@ socket.on('connect_error', () => {
     alert('Ошибка WebSocket соединения. Проверьте сервер.');
 });
 
-const eventSource = new EventSource('http://localhost:3000/updates');
+const eventSource = new EventSource('https://kt4.onrender.com/updates'); 
 
 eventSource.onmessage = (event) => {
     const updates = document.querySelector('#updates');
