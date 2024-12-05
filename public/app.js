@@ -1,6 +1,5 @@
 async function fetchData(endpoint) {
     try {
-        // Проверим правильность URL
         const url = `https://jsonplaceholder.typicode.com/${endpoint}`;
         console.log('Запрос к URL:', url); // Добавим лог для проверки
 
