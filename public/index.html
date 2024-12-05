@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Technologies</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>Использование Fake API</h1>
+    <label for="dataTypeSelect">Выберите данные:</label>
+    <select id="dataTypeSelect">
+        <option value="users">Пользователи</option>
+        <option value="posts">Посты</option>
+    </select>
+    <button id="loadDataButton">Загрузить данные</button>
+    <div id="dataContainer"></div>
+
+    <h2>Чат</h2>
+    <ul id="messages"></ul>
+    <form id="chatForm">
+        <input id="chatInput" autocomplete="off" placeholder="Введите сообщение" /><button>Отправить</button>
+    </form>
+
+    <h2>Обновления</h2>
+    <div id="updates"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

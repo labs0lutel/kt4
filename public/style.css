@@ -1,0 +1,16 @@
+#dataContainer, #messages, #updates {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    max-height: 200px;
+    overflow-y: auto;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+ul li {
+    margin: 5px 0;
+}
