@@ -1,11 +1,15 @@
-// Функция для загрузки данных с Fake API
 async function fetchData(endpoint) {
     try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/${endpoint}`);
+        // Проверим правильность URL
+        const url = `https://jsonplaceholder.typicode.com/${endpoint}`;
+        console.log('Запрос к URL:', url); // Добавим лог для проверки
+
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Ошибка: ${response.status}`);
         }
         const data = await response.json();
+        console.log('Данные получены:', data); // Логируем полученные данные
         return data;
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
@@ -14,18 +18,20 @@ async function fetchData(endpoint) {
     }
 }
 
-// Функция для отображения данных
 function renderData(data) {
     const container = document.querySelector('#dataContainer');
     container.innerHTML = ''; // Очищаем контейнер перед рендером новых данных
-    data.forEach(item => {
-        const div = document.createElement('div');
-        div.textContent = JSON.stringify(item, null, 2); // Преобразуем объект в строку для отображения
-        container.appendChild(div);
-    });
+    if (data && data.length) {
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.textContent = JSON.stringify(item, null, 2); // Преобразуем объект в строку для отображения
+            container.appendChild(div);
+        });
+    } else {
+        container.textContent = 'Нет данных для отображения.';
+    }
 }
 
-// Обработчик кнопки загрузки данных
 document.querySelector('#loadDataButton').addEventListener('click', async () => {
     const endpoint = document.querySelector('#dataTypeSelect').value; // "users" или "posts"
     const data = await fetchData(endpoint);
