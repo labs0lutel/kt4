@@ -1,3 +1,4 @@
+// Функция для загрузки данных с Fake API
 async function fetchData(endpoint) {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/${endpoint}`);
@@ -13,25 +14,28 @@ async function fetchData(endpoint) {
     }
 }
 
+// Функция для отображения данных
 function renderData(data) {
     const container = document.querySelector('#dataContainer');
-    container.innerHTML = '';
+    container.innerHTML = ''; // Очищаем контейнер перед рендером новых данных
     data.forEach(item => {
         const div = document.createElement('div');
-        div.textContent = JSON.stringify(item, null, 2);
+        div.textContent = JSON.stringify(item, null, 2); // Преобразуем объект в строку для отображения
         container.appendChild(div);
     });
 }
 
+// Обработчик кнопки загрузки данных
 document.querySelector('#loadDataButton').addEventListener('click', async () => {
-    const endpoint = document.querySelector('#dataTypeSelect').value;
+    const endpoint = document.querySelector('#dataTypeSelect').value; // "users" или "posts"
     const data = await fetchData(endpoint);
     if (data) {
         renderData(data);
     }
 });
 
-const socket = io('https://kt4.onrender.com'); 
+// WebSocket
+const socket = io('https://kt4.onrender.com'); // Подключение к серверу
 
 document.querySelector('#chatForm').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -51,7 +55,8 @@ socket.on('connect_error', () => {
     alert('Ошибка WebSocket соединения. Проверьте сервер.');
 });
 
-const eventSource = new EventSource('https://kt4.onrender.com/updates'); 
+// Server-Sent Events (SSE)
+const eventSource = new EventSource('https://kt4.onrender.com/updates'); // Подключение к SSE серверу
 
 eventSource.onmessage = (event) => {
     const updates = document.querySelector('#updates');
